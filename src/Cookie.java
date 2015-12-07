@@ -7,18 +7,33 @@
  * 
  * @author YOURNAMEHERE
  */
-public class Cookie {
-    
+public class Cookie extends DessertItem {
+    private int number;
+    private int priceper12;
+    private int cost;
     
     public Cookie(String name, int number, int pricePer12)
     {
-        
+        super(name);
+        this.number = number;
+        this.priceper12 = pricePer12;
+        cost = ((number * pricePer12) / 12);
     }
 
     
     public String toString()
     {
-        return "";
+        String name = super.getName();
+        String output = number + " lbs. @ $ " + priceper12 + " /lb. \n";
+        int widthCookie = DessertShoppe.RECEIPT_WIDTH - name.length();
+          output += super.getName() + String.format("%" + widthCookie + "s",
+                 DessertShoppe.cents2dollarsAndCents(getCost()));
+        return output;
+    }
+
+    @Override
+    public int getCost() {
+        return cost;
     }
     
 }
